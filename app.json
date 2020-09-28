@@ -1,0 +1,12 @@
+{
+  "name": "expoReact",
+  "displayName": "expoReact",
+  "expo": {
+    "name": "expoReact",
+    "slug": "expoReact",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
