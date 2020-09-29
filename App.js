@@ -1,21 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { MapView, Permissions } from 'expo';
 
-export default function App() {
+import MapScreen from './screens/MapScreen';
+import Cleiton from './screens/StatusBar';
+import Calendario from './screens/Calendar';
+import VideoThumbnail from './screens/VideoThumbnails';
+import Bateria from './screens/Battery';
+import Giroscopio from './screens/Gyroscope';
+import MyPager from './screens/MyPager';
+
+function HomeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('MapScreen')}
+        title="Go to notifications"
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="MapScreen" component={MapScreen} />
+        <Drawer.Screen name="VideoThumbnail" component={VideoThumbnail} />
+        <Drawer.Screen name="Bateria" component={Bateria} />
+        <Drawer.Screen name="Giroscopio" component={Giroscopio} />
+        <Drawer.Screen name="MyPager" component={MyPager} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
